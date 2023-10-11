@@ -45,11 +45,13 @@ int main (int argc, char *argv[]) {
     else {
       i--; 
     }
+    if (i==10) break;
     Draw();
   }
 
-  if (i%2==0) cout << "o has won" << endl;
-  if (i%2!=0) cout << "x has won" << endl;
+  if (i%2==0 && i!=10) cout << "o has won" << endl;
+  if (i%2!=0 && i!=10) cout << "x has won" << endl;
+  if (i==10) cout << "match was a tie" << endl;
 
   return 0;
 }
