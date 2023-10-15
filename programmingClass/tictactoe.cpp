@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <iostream>
 using namespace std;
 
@@ -15,7 +16,31 @@ void Draw()
   }
 }
 
+int Takemove()
+{
+  bool isValid = false;
+  int a = rand() % 2;
+  int b = rand() % 2;
+  while (!isValid) {
+    if (board[a][b]!=1 and board[a][b]!=2) {
+      board[a][b] = 2;
+      isValid=true;
+      Draw();
+    }
+  }
+  return 0;
+}
+
 bool isWin() {
+
+  //checking diagnals
+  if ((board[0][0]==1 and board[1][1]==1 and board[2][2]==1)or(board[0][0]==2 and board[1][1]==2 and board[2][2]==2)) {
+    return true;
+  }
+  if ((board[0][2]==1 and board[1][1]==1 and board[2][0]==1)or(board[0][2]==2 and board[1][1]==2 and board[2][0]==2)) {
+    return true;
+  }
+
   for (int i=0; i<=2; i++) {
 
     //check all rows
@@ -36,10 +61,15 @@ int main (int argc, char *argv[]) {
   int a, b;
 
   while (!isWin()) {
+
+    if (i%2!=0) {
+      Takemove();
+      i++;
+    }
+
     cin >> a >> b; 
     if (board[a][b]!=1 && board[a][b]!=2) {
       if (i%2==0) board[a][b]=1;
-      if (i%2!=0) board[a][b]=2;
       i++;
     }
     else {
